@@ -15,21 +15,22 @@
 			<th> Percentage</th>
 		</tr>
 		
-		<td>
+		<tr>
+		  
 		{%for item in occupation%}
 			<tr>
 				<td> {{item}}</td>
 			</tr>			
 			{%endfor%}
-		</td>
 		
 		<td>
-		{%for item in percents%}
+		{%for perc in percents%}
 			<tr>
-				<td> {{item}}</td>
+				<td> {{perc}}</td>
 			</tr>			
 			{%endfor%}
 		</td>
+		</tr>
     </table>
 	
   </body>
