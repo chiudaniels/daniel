@@ -1,14 +1,37 @@
 <!DOCTYPE = HTML>
 <html>
+
   <head>
     <title>Occupations</title>
   </head>
 
   <body>
+  
     <h1>Occupation Table</h1>
-
     <table>
-      
+	
+		<tr>
+			<th> Occupation</th>
+			<th> Percentage</th>
+		</tr>
+		
+		<td>
+		{%for item in occupation%}
+			<tr>
+				<td> {{item}}</td>
+			</tr>			
+			{%endfor%}
+		</td>
+		
+		<td>
+		{%for item in percents%}
+			<tr>
+				<td> {{item}}</td>
+			</tr>			
+			{%endfor%}
+		</td>
     </table>
+	
   </body>
+  
 </html>
