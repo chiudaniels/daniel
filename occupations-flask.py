@@ -12,12 +12,12 @@ for line in a:
   perc.append((line.replace("\n",""))[b+1:])
 dictionary=dict (zip(name,perc))
 ##################################################
-print name
+#print name
 app= Flask(__name__)
 
 @app.route("/occupations")
 def template():
-    return render_template('occupations-html.html',ocupation=dictionary)
+    return render_template('occupations-html.html',occupation=dictionary)
     
 if __name__ == '__main__':
     app.debug= True
