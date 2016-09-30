@@ -5,9 +5,9 @@
 </head>
 <body>
   <h1>test</h1>
-  <form>
-    <input type ="text">
-    <input type ="submit" value="Submit Query"> 
+  <form action="/authenticate/" >
+    <input type="text" name="wow">
+    <input type="submit"> 
   </form>
 </body>
 </html>

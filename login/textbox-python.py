@@ -2,14 +2,16 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/", methods=['POST', 'GET'])
+@app.route("/")
 def template():
     return render_template('textbox.html')
 
-@app.route("/authenticate/")
+@app.route("/authenticate/", methods=['POST'])
 def worked():
-    "worked" ==  request.form
-    print worked
+    if request.form['username'] == 'daniel' and request.form['password'] == 'chiu':
+        return "hello"
+    else:
+        return "didn't work"
     
 if __name__ == '__main__':
     app.debug = True
