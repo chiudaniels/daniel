@@ -12,6 +12,11 @@ def worked():
         return "hello"
     else:
         return "didn't work"
+
+@app.route("/failed/")
+def didntWork():
+    return render_template('failure.html')
+
     
 if __name__ == '__main__':
     app.debug = True
