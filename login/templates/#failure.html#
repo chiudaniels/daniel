@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Box</title>
+</head>
+<body>
+  <h1>test</h1>
+  <form action="/authenticate/" method="post">
+    <p>invalid username or password</p>
+    <input type="text" name="username" value="username">
+    <br>
+    <input type="text" name="password" value="password">
+    <br>
+    <input type="submit" name="login" value="login">
+    <input type="submit" name="login" value="login">
+    <br>
+    <input type="submit" name="register" value="register">
+  </form>
+</body>
+</html>
+
+
+
+
+<input type="submit" name="login" value="login">
+<br>
+<input type="submit" name="register" value="register">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+    <input type="submit" name="register" value="register">
+  </form>
+</body>
+</html>
+<input type="submit" name="login" value="login">
+<br>
+<input type="submit" name="register" value="register">
+</form>
+</body>
+</html>
+
+
+
+
+<input type="submit" name="login" value="login">
+<br>
+<input type="submit" name="register" value="register">
+</form>
+</body>
+</html>
+
+
+
+
+<input type="submit" name="login" value="login">
+<br>
+<input type="submit" name="register" value="register">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
