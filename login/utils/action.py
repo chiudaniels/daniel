@@ -1,0 +1,34 @@
+from flask import Flask, render_template, request
+import csv, hashlib
+
+datalist={}
+
+def opendata():
+    with open('loginData.csv', 'rb') as csvfile:
+        data=csv.DictReader(csvfile)
+        datalist= dict(data)
+
+def register():
+    if datalist.has_key(request.form['username']):
+        return render_template('textbox.html', message = 'username already exsists')
+    else:
+        with open('loginData.csv','a') as csvfile:
+            fieldname=['username','password']
+            cred=csv.DictWriter(csvfile, fieldnames=fieldname)
+            password= hashlib.sha512(request.form['password'])
+            cred.writeheader()
+            cred.writerow({'username':request.form['username'], 'password':password.hexdigest()})
+            return render_template('textbox.html', message = 'username and password succesfully registered')
+
+def authenticate():
+    if datalist.has_key(request.form['username']) and datalist.get(request.form['username']) == hashlib.sha512(request.form['password']).hexdigest():
+        return render_template('worked.html')
+    else:
+        return render_template('textbox.html', message='invalid username or password') 
+
+def worked():
+    opendata()
+    if request.form['submit'] == 'register':
+        register()
+    elif request.form['submit'] == 'login':
+        authenticate()
