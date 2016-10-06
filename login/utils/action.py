@@ -1,33 +1,42 @@
 from flask import Flask, render_template, request
 import csv, hashlib
 
-datalist={}
+logindata='data/loginData'
 
-def opendata():
-    with open('loginData.csv', 'rb') as csvfile:
-        data=csv.DictReader(csvfile)
-        datalist= dict(data)
+def getUsers():
+    f = open( logindata, 'r')
+    data = f.read().strip()
+    f.close()
+    data = data.split('\n')
+    users = {}
+    if data[0] == '':
+        return users
+    for line in data:
+        line = line.split(',')
+        users[line[0]] = line[1]
+    return users
 
-def register():
-    if datalist.has_key(request.form['username']):
+def register(username, password):
+    data=getUsers()
+    
+    if username in data:
         return render_template('textbox.html', message = 'username already exsists')
     else:
-        with open('loginData.csv','a') as csvfile:
-            fieldname=['username','password']
-            cred=csv.DictWriter(csvfile, fieldnames=fieldname)
-            password= hashlib.sha512(request.form['password'])
-            cred.writeheader()
-            cred.writerow({'username':request.form['username'], 'password':password.hexdigest()})
-            return render_template('textbox.html', message = 'username and password succesfully registered')
+        password = hashlib.sha512(password).hexdigest()
+        f= open(logindata,'a')
+        f.write( username + ',' + password + '\n' )
+        f.close()
+        return render_template('textbox.html', message = 'username and password succesfully registered')
 
-def authenticate():
-    if datalist.has_key(request.form['username']) and datalist.get(request.form['username']) == hashlib.sha512(request.form['password']).hexdigest():
+def authenticate(username,password):
+    data=getUsers()
+    password = hashlib.sha512(password).hexdigest()
+    if username in data and password == daat[username]:
         return render_template('worked.html')
     else:
         return render_template('textbox.html', message='invalid username or password') 
 
 def worked():
-    opendata()
     if request.form['submit'] == 'register':
         register()
     elif request.form['submit'] == 'login':
