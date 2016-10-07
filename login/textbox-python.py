@@ -3,7 +3,7 @@ import csv, hashlib, os
 from utils import action
 
 app = Flask(__name__)
-#app.secret_key = os.urandom(24)
+app.secret_key = os.urandom(24)
 
 
 @app.route("/")
@@ -19,12 +19,18 @@ def login():
              return render_template('textbox.html', message = 'username already exsists')
      elif request.form['submit'] == 'login':
          if action.authenticate(request.form['username'],request.form['password']):
-             return render_template('worked.html')
+             session['user'] = request.form['username']
+             return redirect(url_for('/session/'))
          else:
              return render_template('textbox.html', message='invalid username or password')
 
 @app.route("/session/")
 def session():
+    if session['user'] == request.form['user']:
+        return render_template('worked.html')
+    else:
+        session.pop('user')
+        session['user']= request.form['username']
     
 if __name__ == '__main__':
     app.debug = True
