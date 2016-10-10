@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,session, redirect
+from flask import Flask, render_template, request, session, redirect, url_for
 import csv, hashlib, os
 from utils import action
 
@@ -18,6 +18,7 @@ def login():
          else:
              return render_template('textbox.html', message = 'username already exsists')
      elif request.form['submit'] == 'login':
+         #session.pop('user')
          if action.authenticate(request.form['username'],request.form['password']):
              session['user'] = request.form['username']
              return redirect(url_for('/session/'))
@@ -26,12 +27,17 @@ def login():
 
 @app.route("/session/")
 def session():
-    if session['user'] == request.form['user']:
+    if 'user' in session:
         return render_template('worked.html')
     else:
-        session.pop('user')
-        session['user']= request.form['username']
+        redirect(url_for('/'))
+
+@app.route("/logout/")
+def logout():
+    session.pop('user')
+    redirect (url_for('/'))
     
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
