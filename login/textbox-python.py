@@ -32,7 +32,7 @@ def auth():
 @app.route("/logout/", methods = ['POST'])
 def logout():
     session.pop('user')
-    return redirect (url_for('login'))
+    return redirect (url_for('template'))
     
 
 if __name__ == '__main__':
