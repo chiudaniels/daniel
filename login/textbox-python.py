@@ -3,12 +3,15 @@ import csv, hashlib, os
 from utils import action
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = "hehexd"
 
 
 @app.route("/")
 def template():
-    return render_template('textbox.html', message='')
+    if 'user' in session:
+        return render_template('worked.html')
+    else:
+        return render_template('textbox.html', message='')
 
 @app.route("/authenticate/", methods=['POST'])
 def login():
@@ -20,19 +23,12 @@ def login():
      elif request.form['submit'] == 'login':
          #session.pop('user')
          if action.authenticate(request.form['username'],request.form['password']):
-             session['user'] = request.form['username']
+             session["user"] = request.form['username']
              return redirect(url_for('/session/'))
          else:
              return render_template('textbox.html', message='invalid username or password')
 
-@app.route("/session/")
-def session():
-    if 'user' in session:
-        return render_template('worked.html')
-    else:
-        redirect(url_for('/'))
-
-@app.route("/logout/")
+@app.route("/logout/", methods = ['POST'])
 def logout():
     session.pop('user')
     redirect (url_for('/'))
