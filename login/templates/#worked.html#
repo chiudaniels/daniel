@@ -6,7 +6,7 @@
 <body>
  <p>welcome!</p>
  <br>
- <form action="/logout/" method="POST">
+ <form action="/logout/">
    <input type="submit" name= "logout" value="logout">
  </form>
 </body>
